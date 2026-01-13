@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "bun server/index.ts",
+    "dev": "bun --watch server/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.7.6",
+    "hono": "^4.11.4",
+    "zod": "^4.3.5"
+  }
+}
