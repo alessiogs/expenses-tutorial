@@ -10,17 +10,17 @@ import { api } from "../lib/api"
 import { createFileRoute } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/")({
-  component: RouteComponent,
+  component: Index,
 })
 
-function RouteComponent() {
-  const getTotal = async () => {
-    const response = await api.expenses["total"].$get()
-    if (!response.ok) throw new Error("server error")
-    const data = await response.json()
-    return data
-  }
+const getTotal = async () => {
+  const response = await api.expenses["total"].$get()
+  if (!response.ok) throw new Error("server error")
+  const data = await response.json()
+  return data
+}
 
+function Index() {
   const { data, error, isPending } = useQuery({
     queryKey: ["get-total"],
     queryFn: getTotal,
