@@ -5,17 +5,22 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./components/ui/card"
-import { api } from "./lib/api"
+} from "../components/ui/card"
+import { api } from "../lib/api"
+import { createFileRoute } from "@tanstack/react-router"
 
-const getTotal = async () => {
-  const response = await api.expenses["total"].$get()
-  if (!response.ok) throw new Error("server error")
-  const data = await response.json()
-  return data
-}
+export const Route = createFileRoute("/")({
+  component: RouteComponent,
+})
 
-const App = () => {
+function RouteComponent() {
+  const getTotal = async () => {
+    const response = await api.expenses["total"].$get()
+    if (!response.ok) throw new Error("server error")
+    const data = await response.json()
+    return data
+  }
+
   const { data, error, isPending } = useQuery({
     queryKey: ["get-total"],
     queryFn: getTotal,
@@ -35,5 +40,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App
